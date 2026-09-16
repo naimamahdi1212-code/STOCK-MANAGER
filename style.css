@@ -1,0 +1,312 @@
+/* ===================================================
+   Duka Stock — Shop Inventory
+   Theme: cool slate + amber accent, clean/industrial
+   =================================================== */
+
+:root {
+  --bg: #F2F4F7;
+  --panel: #FFFFFF;
+  --ink: #1F2A37;
+  --ink-soft: #64748B;
+  --rule: #E2E8F0;
+  --navy: #1F3A5F;
+  --amber: #E8871E;
+  --amber-deep: #C46E12;
+  --amber-soft: #FDF1E2;
+  --danger: #C0392B;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  padding: 36px 20px 60px;
+}
+
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ---------- Header ---------- */
+
+.app-header {
+  margin-bottom: 28px;
+}
+
+.header-top h1 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 2.1rem;
+  margin: 0;
+  color: var(--navy);
+}
+
+.tagline {
+  margin: 4px 0 18px 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.summary-cards {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.summary-card {
+  flex: 1;
+  min-width: 160px;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-card.highlight {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.summary-card.highlight .summary-label {
+  color: #B9C6D6;
+}
+
+.summary-value {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--navy);
+  margin-top: 4px;
+}
+
+.summary-card.highlight .summary-value {
+  color: var(--amber);
+}
+
+/* ---------- Entry form ---------- */
+
+.entry-form-section {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 22px 24px;
+  margin-bottom: 30px;
+}
+
+.form-heading {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: 1rem;
+  margin: 0 0 16px 0;
+  color: var(--navy);
+}
+
+.field-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.field-small {
+  max-width: 180px;
+}
+
+label {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+input, select {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 0.95rem;
+  padding: 9px 11px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: var(--ink);
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px var(--amber-soft);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 600;
+  transition: background 0.15s ease;
+}
+
+.btn-primary:hover { background: var(--amber-deep); }
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+/* ---------- Entries list ---------- */
+
+.entries-heading {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 70px 100px 100px 90px;
+  gap: 10px;
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+  padding: 0 6px 8px;
+  border-bottom: 2px solid var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.entry-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 70px 100px 100px 90px;
+  gap: 10px;
+  align-items: center;
+  padding: 13px 6px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.entry-row .entry-name {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.entry-row .entry-category {
+  display: inline-block;
+  font-size: 0.74rem;
+  color: var(--navy);
+  background: #EAF1F8;
+  padding: 3px 9px;
+  border-radius: 12px;
+  width: fit-content;
+}
+
+.align-right { text-align: right; }
+
+.entry-qty {
+  text-align: right;
+  color: var(--ink-soft);
+}
+
+.entry-price {
+  text-align: right;
+  color: var(--ink-soft);
+}
+
+.entry-value {
+  text-align: right;
+  font-weight: 700;
+  color: var(--amber-deep);
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+.entry-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.entry-actions button {
+  background: none;
+  border: none;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.entry-actions button.delete-btn:hover { color: var(--danger); }
+.entry-actions button.edit-btn:hover { color: var(--amber-deep); }
+
+.empty-state {
+  padding: 30px 6px;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* ---------- Footer ---------- */
+
+.page-footer {
+  margin-top: 36px;
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 680px) {
+  .entries-heading { display: none; }
+
+  .entry-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 14px 6px;
+  }
+
+  .entry-row .entry-name { order: 1; }
+  .entry-row .entry-category { order: 2; margin-top: 2px; }
+  .entry-qty { order: 3; text-align: left; }
+  .entry-qty::before { content: "Qty: "; color: var(--ink-soft); font-size: 0.8rem; }
+  .entry-price { order: 4; text-align: left; }
+  .entry-price::before { content: "Unit: "; color: var(--ink-soft); font-size: 0.8rem; }
+  .entry-value { order: 5; text-align: left; }
+  .entry-value::before { content: "Value: "; color: var(--ink-soft); font-weight: 400; font-size: 0.8rem; }
+  .entry-actions { order: 6; justify-content: flex-start; margin-top: 6px; }
+
+  .field-row { flex-direction: column; gap: 14px; }
+  .field-small { max-width: none; }
+
+  .summary-cards { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
