@@ -13,6 +13,11 @@
   <div class="page">
 
     <header class="app-header">
+      <div class="user-bar">
+        <span id="userEmail" class="user-email"></span>
+        <span id="userRole" class="role-badge"></span>
+        <button type="button" id="logoutBtn" class="btn-text">Log out</button>
+      </div>
       <div class="header-top">
         <h1>Stock Inventory</h1>
         <p class="tagline">Know what's on the shelf, and what it's worth.</p>
@@ -45,9 +50,9 @@
               <option value="" disabled selected>Choose one</option>
               <option value="Groceries">Groceries</option>
               <option value="Household">Household</option>
-               <option value="Household">Foodstuffs</option>
-                <option value="Household">Pasteries</option>
-                 <option value="Household">Refreshments</option>
+              <option value="Foodstuffs">Foodstuffs</option>
+              <option value="Pastries">Pastries</option>
+              <option value="Refreshments">Refreshments</option>
               <option value="Electricals">Electricals</option>
               <option value="Building Materials">Building Materials</option>
               <option value="Stationery">Stationery</option>
@@ -100,6 +105,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
