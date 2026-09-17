@@ -11,8 +11,8 @@
 // SUPABASE SETUP — fill these 2 values in during class
 // ---------------------------------------------------
 
-const SUPABASE_URL = "PASTE_YOUR_PROJECT_URL_HERE";
-const SUPABASE_KEY = "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+const SUPABASE_URL = "https://dgjaxqjmxmntcwciyixb.supabase.co";
+const SUPABASE_KEY = "sb_publishable_mPPYNO3Hbk0znj7Zwr0ciA_xhQBn3La";
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
