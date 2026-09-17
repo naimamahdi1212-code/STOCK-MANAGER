@@ -5,16 +5,9 @@
    BACKEND: Supabase
    All four operations (Read, Create, Update, Delete) are
    connected to a real Supabase "inventory" table.
+   The Supabase client itself lives in supabase-client.js,
+   loaded before this file.
    =================================================== */
-
-// ---------------------------------------------------
-// SUPABASE SETUP — fill these 2 values in during class
-// ---------------------------------------------------
-
-const SUPABASE_URL = "https://dgjaxqjmxmntcwciyixb.supabase.co";
-const SUPABASE_KEY = "sb_publishable_mPPYNO3Hbk0znj7Zwr0ciA_xhQBn3La";
-
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ---------------------------------------------------
 // DATA LAYER
@@ -77,6 +70,52 @@ const emptyState = document.getElementById('emptyState');
 const itemCountEl = document.getElementById('itemCount');
 const totalValueEl = document.getElementById('totalValue');
 
+const userEmailEl = document.getElementById('userEmail');
+const userRoleEl = document.getElementById('userRole');
+const logoutBtn = document.getElementById('logoutBtn');
+
+// ---------------------------------------------------
+// AUTH
+// ---------------------------------------------------
+
+let currentUser = null;
+let isAdmin = false;
+
+// Redirects to login.html if nobody's signed in; otherwise returns the user
+async function requireAuth() {
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if (!session) {
+    window.location.href = 'login.html';
+    return null;
+  }
+  return session.user;
+}
+
+// Reads the signed-in user's role from the "profiles" table
+// (defaults to non-admin if it can't be read, as a fail-safe)
+async function loadRole(userId) {
+  const { data, error } = await supabaseClient
+    .from('profiles')
+    .select('role')
+    .eq('id', userId)
+    .single();
+
+  if (error) {
+    console.error("Couldn't load profile/role:", error);
+    return 'staff';
+  }
+  return data.role;
+}
+
+supabaseClient.auth.onAuthStateChange((event) => {
+  if (event === 'SIGNED_OUT') window.location.href = 'login.html';
+});
+
+logoutBtn.addEventListener('click', async () => {
+  await supabaseClient.auth.signOut();
+  window.location.href = 'login.html';
+});
+
 // ---------------------------------------------------
 // RENDERING
 // ---------------------------------------------------
@@ -123,7 +162,7 @@ async function renderItems() {
         <span class="entry-value">${formatCurrency(value)}</span>
         <span class="entry-actions">
           <button type="button" class="edit-btn" data-id="${item.id}">Edit</button>
-          <button type="button" class="delete-btn" data-id="${item.id}">Delete</button>
+          ${isAdmin ? `<button type="button" class="delete-btn" data-id="${item.id}">Delete</button>` : ''}
         </span>
       `;
       entriesList.appendChild(row);
@@ -235,4 +274,15 @@ function exitEditMode() {
 // INIT
 // ---------------------------------------------------
 
-renderItems();
+(async function init() {
+  currentUser = await requireAuth();
+  if (!currentUser) return; // requireAuth already redirected to login.html
+
+  isAdmin = (await loadRole(currentUser.id)) === 'admin';
+
+  userEmailEl.textContent = currentUser.email;
+  userRoleEl.textContent = isAdmin ? 'Admin' : 'Staff';
+  userRoleEl.classList.toggle('role-badge-admin', isAdmin);
+
+  await renderItems();
+})();
